@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Profile
+{% endblock %}
+
+{% block main %}
+
+    <div class="text-center">
+
+    <!-- Title -->
+
+        <div class="my-4"> </div>
+        <div class="jumbotron mt-4">
+            <h1>User {{ user_info.username }}'s Profile</h1>
+        </div>
+        <div class="my-2"> </div>
+
+    <!-- User Info -->
+
+        <h3 class="mt-5 mb-4">
+            Your Ratings
+        </h3>
+        <p>
+            {% if user_info.num_ratings == 0 %}
+                You haven't rated any spots yet.
+            {% elif user_info.num_ratings == 1 %}
+                <!-- Singular grammar version -->
+                You have rated 1 spot, with an average rating of {{ user_info.avg_stars }} &#11088;
+            {% else %}
+                <!-- Plural grammar version -->
+                You have rated {{ user_info.num_ratings }} spots, with an average rating of {{ user_info.avg_stars }} &#11088;
+            {% endif %}
+        </p>
+        <div> </div>
+        <h3 class="mt-5 mb-4">
+            Your Study Preferences
+        </h3>
+
+        {% if not user_info.noise %}
+    <!-- User hasn't taken the quiz yet -->
+            <p>No preferences yet! Take the <a href="/quiz">StudySpotter Quiz</a> to help us learn about you.</p>
+        {% else %}
+    <!-- User took the quiz, so show axes -->
+            <table class="table text-start" style="max-width:45vw">
+                <thead>
+                    <th>Noise</th>
+                    <th>Sociality</th>
+                    <th>Crowding</th>
+                    <th>Size</th>
+                    <th>Decoration</th>
+                </thead>
+                <tr>
+                    <td>{{ user_info.noise }}</td>
+                    <td>{{ user_info.sociality }}</td>
+                    <td>{{ user_info.crowding }}</td>
+                    <td>{{ user_info.size }}</td>
+                    <td>{{ user_info.decoration }}</td>
+                </tr>
+            </table>
+
+        {% endif %}
+
+        <div class="my-4"> </div>
+
+{% endblock %}

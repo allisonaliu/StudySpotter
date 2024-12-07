@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quiz
+{% endblock %}
+
+{% block main %}
+
+    {% if noise %}
+
+<!-- The user already took the quiz, so display a warning -->
+
+        <div class="alert alert-dismissible alert-warning">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <p class="mb-0">You already took the quiz! You're welcome to retake it, but note that submitting it again will overwrite your old preferences.</p>
+        </div>
+
+    {% endif %}
+
+
+
+<!-- Title -->
+
+    <div class="my-4"> </div>
+    <div class="jumbotron text-center mt-4 mb-5">
+        <h1>Take the Quiz</h1>
+        <p class="mt-3">Help StudySpotter learn about you!</p>
+        <p class="mt-5">Answer the following questions honestly. If you don't have a preference, please leave the slider at center.</p>
+        <div> </div>
+    </div>
+
+<!-- Form containing all quiz questions -->
+
+    <div class="container" style="padding-left:10vw;padding-right:10vw;">
+        <form action="/quiz" method="post">
+
+            <h3 class="mt-5">Noise</h3>
+            <p>On a scale of <b>totally silent</b> (0) to <b>boisterous</b> (1.00), how much noise do you like when you work?</p>
+            <input name="noise" type="range" class="form-range" min="0" max="1" step="0.01" oninput="this.nextElementSibling.value = 'Selected: ' + this.value">
+            <output class="mb-5">Selected: 0.5</output>
+
+            <h3 class="mt-5">Sociality</h3>
+            <p>On a scale of <b>leave me alone</b> (0) to <b>study = party</b> (1.00), how social do you like to be when you work?</p>
+            <input name="sociality" type="range" class="form-range" min="0" max="1" step="0.01" oninput="this.nextElementSibling.value = 'Selected: ' + this.value">
+            <output class="mb-5">Selected: 0.5</output>
+
+            <h3 class="mt-5">Crowding</h3>
+            <p>On a scale of <b>deserted</b> (0) to <b>bustling</b> (1.00), how crowded do you like your work environment?</p>
+            <input name="crowding" type="range" class="form-range" min="0" max="1" step="0.01" oninput="this.nextElementSibling.value = 'Selected: ' + this.value">
+            <output class="mb-5">Selected: 0.5</output>
+
+            <h3 class="mt-5">Size</h3>
+            <p>On a scale of <b>tiny and snug</b> (0) to <b>vast and spacious</b> (1.00), how large do you like your physical work environment?</p>
+            <input name="size" type="range" class="form-range" min="0" max="1" step="0.01" oninput="this.nextElementSibling.value = 'Selected: ' + this.value">
+            <output class="mb-5">Selected: 0.5</output>
+
+            <h3 class="mt-5">Decoration</h3>
+            <p>On a scale of <b>simple</b> (0) to <b>grand</b> (1.00), how decorated do you like your work environment?</p>
+            <input name="decoration" type="range" class="form-range" min="0" max="1" step="0.01" oninput="this.nextElementSibling.value = 'Selected: ' + this.value">
+            <output class="mb-5">Selected: 0.5</output>
+
+            <br>
+
+            <button type="submit" class="btn btn-primary mt-5">Submit All</button>
+        </form>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Apology
+{% endblock %}
+
+{% block main %}
+
+    <div class="text-center">
+    <!-- https://memegen.link/ -->
+
+    <!-- My sad kitten picture comes from: https://www.meme-arsenal.com/en/create/template/11262153 -->
+        <img alt="{{ top }}" class="border img-fluid" src="https://api.memegen.link/images/custom/{{ top | urlencode }}/{{ bottom | urlencode }}.jpg?background=https://www.meme-arsenal.com/memes/5cfc0586905ded219b116844f7245e36.jpg&width=400" title="{{ top }}">
+
+    <!-- Grumpy cat: https://knowyourmeme.com/memes/grumpy-cat -->
+    <!-- <img alt="{{ top }}" class="border img-fluid" src="https://api.memegen.link/images/custom/{{ top | urlencode }}/{{ bottom | urlencode }}.jpg?background=https://i.imgur.com/CsCgN7Ll.png&width=400" title="{{ top }}"> -->
+    <!-- Back button inspired by: https://www.w3schools.com/jsref/met_his_back.asp -->
+        <br>
+        <button type="button" class="mt-3 btn btn-primary" onclick="history.back()">Go Back</button>
+    </div>
+
+
+{% endblock %}

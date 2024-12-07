@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Account
+{% endblock %}
+
+{% block main %}
+
+    <div class="text-center">
+
+    <!-- Title -->
+
+        <div class="my-4"> </div>
+        <div class="jumbotron mt-4">
+            <h1>User {{ username }}'s Account</h1>
+            <div class="my-4"> </div>
+        </div>
+
+    <!-- Change Password -->
+
+        <h3 class="mb-5">
+            Change Password
+        </h3>
+
+        <form action="/account" method="post">
+            <div class="mb-3">
+                <input class="form-control mx-auto w-auto" name="current_password" placeholder="Current password" type="password">
+            </div>
+            <div class="mb-3">
+                <input class="form-control mx-auto w-auto" name="new_password" placeholder="New password" type="password" minlength="8">
+            </div>
+            <div class="mb-3">
+                <input class="form-control mx-auto w-auto" name="confirmation" placeholder="Confirm new password" type="password" minlength="8">
+            </div>
+            <button class="btn btn-primary" type="submit">Change Password</button>
+        </form>
+
+
+
+{% endblock %}

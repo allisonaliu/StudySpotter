@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{ spot_info.name }}
+{% endblock %}
+
+{% block main %}
+
+    <div class="text-center">
+
+    <!-- Title -->
+
+        <div class="my-4"> </div>
+        <div class="jumbotron mt-4 mb-5">
+            <h1 class="mb-4">{{ spot_info.name }}</h1>
+            <p>Address: {{ spot_info.location }}</p>
+            <p>Hours: {{ spot_info.hours }}</p>
+        </div>
+
+    <!-- Show image above text -->
+
+        <div>
+            <img alt="an image of {{ spot_info.name }}" src="/static/images/{{ spot_info.id }}.jpg" style="width: 100%">
+        </div>
+
+    </div>
+
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-12 col-md-6">
+                <h3 class="mb-3 mt-5">About</h3>
+                {{ spot_info.description }}
+            </div>
+            <div class="col-12 col-md-6">
+                <form action="/spot" method="post">
+                    <h3 class="mb-3 mt-5">Your Thoughts</h3>
+                    <p>
+                        <b>Rating</b>:
+                        {% if spot_info.stars %}
+                            {% for star in range(spot_info.stars) %}
+                                &#11088;
+                            {% endfor %}
+                            <br>
+                            <br>
+                            Use the slider to select a different rating.
+                        {% else %}
+                            You haven't rated this spot yet.
+                        {% endif %}
+                    </p>
+                <!-- CAUTION with the value attribute on this line: -->
+                    <input name="stars" type="range" class="form-range" min="1" max="5" step="1" value="{{ spot_info.stars }}" oninput="this.nextElementSibling.value = 'Selected: ' + this.value + ' &#11088;'">
+                    <!-- Must specify the default initial selected value since the user hasn't interacted with the slider yet -->
+                    {% if not spot_info.stars %}
+                        <output>Selected: 3 &#11088;</output>
+                    {% else %}
+                        <output>Selected: {{ spot_info.stars }} &#11088;</output>
+                    {% endif %}
+                    <br>
+                    <br>
+                    <p><b>Note</b>:</p>
+                    {% if spot_info.note %}
+                        <textarea class="form-control" name="note" rows="5">{{ spot_info.note }}</textarea>
+                    {% else %}
+                        <textarea class="form-control" name="note" rows="5" placeholder="What would you like to remember about this spot?"></textarea>
+                    {% endif %}
+                    <button type="submit" class="btn btn-primary mt-3">Submit All</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

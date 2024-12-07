@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Spots
+{% endblock %}
+
+{% block main %}
+
+    <div class="text-center">
+
+    <!-- Title -->
+
+        <div class="my-4"> </div>
+        <div class="jumbotron mt-4 mb-5">
+            <h1 class="mb-4">Your Spots</h1>
+            {% if not spots %}
+                <p>No spots yet! Take the <a href="/quiz">StudySpotter quiz</a> to help us learn about you.</p>
+            {% endif %}
+        </div>
+
+    <!-- Table of spots, ordered by fit -->
+
+        <table class="table text-start">
+            <thead>
+                <tr>
+                    <th>Spot</th>
+                    <th>Fit</th>
+                    <th></th> <!-- image -->
+                    <th>Your Rating</th>
+                </tr>
+            </thead>
+            <tbody>
+                <form action="/spots" method="post">
+                    {% for spot in spots %}
+                        <tr>
+                            <td>
+                                {{ spot.name }}
+                                <br>
+                                <button class="btn btn-primary" type="submit" name="spot_id" value="{{ spot.id }}">View</button>
+                            </td>
+                            <td>{{ fit_format(spot.fit) }}</td>
+                            <td><img alt="an image of {{ spot.name }}" src="/static/images/{{ spot.id }}.jpg" style="width:100%;max-height:20vh;min-height:8vh;object-fit:cover;"></td>
+                            <td>
+                                {% if spot.stars %}
+                                    {{ spot.stars }} &#11088;
+                                {% else %}
+                                    - - -
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </form>
+            </tbody>
+        </table>
+
+
+{% endblock %}
